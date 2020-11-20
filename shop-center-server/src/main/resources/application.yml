@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: shop
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/shop-center?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  druid:
+#配置初始化⼤⼩、最⼩、最⼤
+    initial-size: 1
+    min-idle: 5
+    max-active: 5
+    max-wait: 20000
+    time-between-eviction-runs-millis: 600000
+    # 配置⼀个连接在池中最⼤空闲时间，单位是毫秒
+    min-evictable-idle-time-millis: 300000
+    # 设置从连接池获取连接时是否检查连接有效性，true时，每次都检查;false时，不检查
+    test-on-borrow: true
+    #设置往连接池归还连接时是否检查连接有效性，true时，每次都检查;false时，不检查
+    test-on-return: true
+    # 设置从连接池获取连接时是否检查连接有效性，true时，如果连接空闲时间超过 inEvictableIdleTimeMillis进⾏检查，否则不检查;false时，不检查
+    test-while-idle: true
+    # 检验连接是否有效的查询语句。如果数据库Driver⽀持ping()⽅法，则优先使⽤ping()⽅法 进⾏检查，否则使⽤validationQuery查询进⾏检查。(Oracle jdbc Driver⽬前不⽀持ping⽅法)
+    validation-query: select 1 from dual
+    keep-alive: true
+    remove-abandoned: true
+    remove-abandoned-timeout: 80
+    log-abandoned: true
+    #打开PSCache，并且指定每个连接上PSCache的⼤⼩，Oracle等⽀持游标的数据库，打开此开关，会以数量级提升性能，具体查阅PSCache相关资料
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    # 配置间隔多久启动⼀次DestroyThread，对连接池内的连接才进⾏⼀次检测，单位是毫秒。
+    #检测时:
+    #1.如果连接空闲并且超过minIdle以外的连接，如果空闲时间超过 minEvictableIdleTimeMillis设置的值则直接物理关闭。
+    #2.在minIdle以内的不处理。
